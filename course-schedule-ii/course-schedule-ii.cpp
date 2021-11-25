@@ -1,67 +1,88 @@
 class Solution {
 public:
+    
+   bool hasCycle(int src, vector<int>&vis,vector<int>&dfsvis,vector<vector<int>>&adj){
+       
+       vis[src]=1;
+       dfsvis[src]=1;
+       
+       for(auto k:adj[src]){
+           
+           if(!vis[k])
+           {
+               if(hasCycle(k,vis,dfsvis,adj))
+                   return true;
+           }
+           else if(dfsvis[k])
+               return true;
+       }
+       
+       dfsvis[src] = false;
+       
+       return false;
+       
+   } 
+    
+  void topoSort(int src, vector<int>&vis,stack<int>&st,vector<vector<int>>&adj)
+  {
+      vis[src]=1;
+      
+      for(auto k : adj[src])
+      {
+          if(!vis[k]){
+              topoSort(k,vis,st,adj);
+          }
+      }
+      
+      st.push(src);
+  }
+    
     vector<int> findOrder(int n, vector<vector<int>>& pre) {
-        
         
         vector<vector<int>>adj(n);
         
-        for(auto k:pre)
-        {
+        for(auto k:pre){
+            
             adj[k[1]].push_back(k[0]);
-        }
-        
-        vector<int>indegree(n,0);
-        
-        
-        for(int i=0;i<n;i++)
-        {
-            for(auto k:adj[i])
-            {
-                indegree[k]++; // calculating indegree of all nodes
-            }
-        }
-        
-        queue<int>q;
-        
-        // push all nodes with zero indegree into queue
-        
-        for(int i=0;i<n;i++)
-        {
-            if(indegree[i]==0)
-                q.push(i);
+            
         }
         
         vector<int>ans;
+        vector<int>vis(n,false);
+        vector<int>dfsvis(n,false);
         
-        int cnt=0;
-        
-        // cout<<q.size()<<" "<<q.front()<<endl;
-        
-        while(!q.empty())
+        for(int i=0;i<n;i++)
         {
-            
-           int u = q.front();
-            q.pop();
-            ans.push_back(u);
-            
-            for(auto v : adj[u])
+            if(!vis[i])
             {
-                
-                if(--indegree[v]==0){ // if indegree becomes 0 push into queue
-                    q.push(v);
-                }
+                if(hasCycle(i,vis,dfsvis,adj))
+                    return ans;
             }
-            
-            cnt++;
-            
-          
-            
-            
         }
         
-        // if cnt not equal to no of nodes then toposort not possible
+        stack<int>st;
+        vis.assign(n,false);
         
-        if(cnt!=n) return {};
+           for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                topoSort(i,vis,st,adj);
+            }
+               
+        }
+        
+        while(!st.empty())
+        {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        
         return ans;
+        
+        
+        
+        
+        
     }
 };
