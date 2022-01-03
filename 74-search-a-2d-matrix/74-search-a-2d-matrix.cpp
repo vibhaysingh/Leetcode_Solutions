@@ -5,23 +5,24 @@ public:
         int n = mat.size();
         int m = mat[0].size();
         
-        int i = 0;
-        int j = m-1;
+        int low =0,high = m*n-1;
         
-        while(i>=0 && j>=0&&i<n&&j<m){
+        while(low<=high){
             
-            if(mat[i][j]==target){
+            int mid = (low+high)/2;
+            
+            if(mat[mid/m][mid%m]==target){
                 return true;
-            }else if(mat[i][j]>target){
-                j--;
-                
+            }else if(mat[mid/m][mid%m]>target){
+                high = mid-1;
             }else{
-                i++;                
+                low= mid+1;
             }
+                
+            
         }
         
         return false;
-        
         
         
     }
