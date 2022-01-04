@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    bool valid(map<char,int>&mp){
+    bool valid(unordered_map<char,int>&mp){
         
         for(auto k:mp){
             
@@ -14,7 +14,7 @@ public:
     int lengthOfLongestSubstring(string s) {
         
         int n = s.size();
-        map<char,int>mp;
+        unordered_map<char,int>mp;
         
         int i=0, j=0;
         int ans=0;
