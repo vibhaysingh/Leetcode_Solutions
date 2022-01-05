@@ -31,6 +31,41 @@ public:
      }
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         
-        return merge(list1,list2);
+        //return merge(list1,list2);
+        
+        if(list1==NULL) return list2;
+        
+        if(list2== NULL) return list1;
+        
+        ListNode* l1 = list1;
+        ListNode* l2 = list2;
+        ListNode* res = NULL;
+        ListNode* temp = NULL;
+        
+        if(l1->val > l2->val){
+            swap(l1,l2);
+        }
+        
+        res = l1;
+        
+        while(l1!= NULL && l2!=NULL){
+            
+            temp = NULL;
+           
+            while( l1 != NULL && l1->val <= l2->val){
+                temp = l1;
+                l1 = l1->next;
+            }
+            // cout<<l1->val<<l2->val<<temp->val<<endl;
+            temp->next = l2;
+            swap(l1,l2);
+            
+        }
+        
+        
+        return res;
+        
+        
+        
     }
 };
