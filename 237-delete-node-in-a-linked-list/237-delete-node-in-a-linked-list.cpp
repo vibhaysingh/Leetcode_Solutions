@@ -12,7 +12,7 @@ public:
         
         auto next  =  node->next;
         *node = *next;
-        delete next;
+        // delete next;
         
     }
 };
