@@ -10,73 +10,77 @@
  */
 class Solution {
 public:
+    
+    ListNode* solver(ListNode* l1, ListNode* l2,bool carry){
+        
+        
+        if(carry==false){
+            
+        if(l1==NULL&&l2==NULL)
+            return NULL;        
+        else if(l1==NULL) 
+            return l2;        
+        else if(l2==NULL) 
+            return l1;
+        }else{
+            
+         if(l1==NULL&&l2==NULL){
+             ListNode* p = new ListNode(1);
+             return p;
+         }
+         else if(l1==NULL){
+             
+         int sum =  l2->val + carry;
+        
+        ListNode* p = new ListNode(sum%10);
+        
+        if(sum>=10)carry=true;
+        else carry = false;
+        
+        p->next = solver(l1,l2->next,carry);
+        
+        return p;
+             
+         } 
+                  
+         else if(l2==NULL) {
+             
+             int sum = l1->val  + carry;
+        
+        ListNode* p = new ListNode(sum%10);
+        
+        if(sum>=10)carry=true;
+        else carry = false;
+        
+        p->next = solver(l1->next,l2,carry);
+        
+        return p;
+             
+         }
+            
+        }
+        
+        int sum = l1->val + l2->val + carry;
+        
+        ListNode* p = new ListNode(sum%10);
+        
+        if(sum>=10)carry=true;
+        else carry = false;
+        
+        p->next = solver(l1->next,l2->next,carry);
+        
+        return p;
+        
+        
+        
+        
+    }
+    
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-        bool carry=false;
         
-        ListNode* dummy  = new ListNode(-1);
-        ListNode* curr=dummy;
+        return solver(l1,l2,false);
         
-        while(l1!=NULL && l2!=NULL){
-            
-            int a = l1->val;
-            int b = l2->val;
-            
-            int ttl = a+b+carry;
-            
-            if(ttl>=10){
-                carry=true;
-            }else
-                carry = false;
-            ListNode* temp  = new ListNode(ttl%10);
-            curr->next = temp;
-            
-            curr = temp;
-            l1=l1->next;
-            l2= l2->next;
-            
-            
-        }
-        
-        while(l1!=NULL){
-            int a = l1->val;           
-            int ttl = a+carry;
-            
-            if(ttl>=10){
-                carry=true;
-            }else
-                carry = false;
-            ListNode* temp  = new ListNode(ttl%10);
-            curr->next = temp;
-            
-            curr = temp;
-            l1=l1->next;
-            
-        }
-        
-        while(l2!=NULL){
-       
-            int b = l2->val;
-            
-            int ttl = b+carry;
-            
-            if(ttl>=10){
-                carry=true;
-            }else
-                carry = false;
-            ListNode* temp  = new ListNode(ttl%10);
-            curr->next = temp;
-            
-            curr = temp;
-            l2= l2->next;
-        }
-        
-        if(carry){
-            ListNode* temp  = new ListNode(1);
-            curr->next = temp;
-        }
-        
-        return dummy ->next;
         
     }
 };
