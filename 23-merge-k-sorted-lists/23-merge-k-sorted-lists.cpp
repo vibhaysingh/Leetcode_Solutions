@@ -10,53 +10,39 @@
  */
 class Solution {
 public:
-    
-     ListNode* mergeTwoLists ( ListNode* leftList,ListNode* rightList){
-         
-         if(leftList==NULL){
-             return rightList;
-         }
-         
-         if(rightList==NULL){
-             return leftList;
-         }
-         
-         if(leftList->val<=rightList->val){
-             
-             leftList->next = mergeTwoLists(leftList->next,rightList);
-             
-             return leftList;
-             
-         }else{
-             
-             rightList->next = mergeTwoLists(leftList,rightList->next);
-             
-             return rightList;
-         }
-         
-         return NULL;
-     }
-    
-    ListNode* solver(vector<ListNode*>& lists,int start,int end){
-        
-        if(start>end) return NULL;
-        
-        if(start==end) return lists[start];
-        
-        int mid = (start+end)/2;
-        
-        ListNode* leftList = solver(lists,start,mid);
-        ListNode* rightList = solver(lists,mid+1,end);
-        
-        return mergeTwoLists(leftList,rightList);
-    }
-    
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         
-        int start = 0;
-        int end = lists.size()-1;
+        auto it =[] (ListNode*a,ListNode*b){
+            
+            if(a->val>b->val)
+                return true;
+            return false;
+        };
         
-        return solver(lists,start,end);
+        priority_queue<ListNode*, vector<ListNode*>, decltype(it)> pq(it);
         
+        ListNode* head = new ListNode(0);
+        ListNode* curr = head;
+        
+        for(auto k:lists){
+            
+            if(k!=NULL)
+            pq.push(k);
+        }
+        
+        while(!pq.empty()){
+            
+            auto k = pq.top();
+            pq.pop();
+            
+            curr->next = k;
+            curr = k;
+            
+            if(k!=NULL&&k->next!=NULL){
+                pq.push(k->next);
+            }
+        }
+        
+        return head->next;
     }
 };
