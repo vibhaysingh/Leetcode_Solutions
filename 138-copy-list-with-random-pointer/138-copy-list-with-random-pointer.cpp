@@ -17,7 +17,7 @@ public:
 class Solution {
 public:
     
-    map<Node*,Node*>mp; // < old,new >
+    unordered_map<Node*,Node*>mp; // < old,new >
     
     Node* solver(Node* head){
         
@@ -32,7 +32,7 @@ public:
         
         if(head->random!=NULL){
             
-            new_head->random = mp[head->random];
+            mp[head]->random = mp[head->random];
         }
         
         return new_head;
