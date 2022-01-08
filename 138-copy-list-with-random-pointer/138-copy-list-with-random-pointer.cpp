@@ -32,7 +32,7 @@ public:
         
         if(head->random!=NULL){
             
-            mp[head]->random = mp[head->random];
+            new_head->random = mp[head->random];
         }
         
         return new_head;
