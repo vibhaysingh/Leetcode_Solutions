@@ -10,51 +10,58 @@
  */
 class Solution {
 public:
-    
-   
-    
     ListNode* insertionSortList(ListNode* head) {
         
+        if(head==NULL||head->next==NULL) return head;
         
-        ListNode * p1 = head;
-        ListNode * prev1 = NULL;
-        ListNode * next1 = NULL;
+        ListNode* dummy = new ListNode(INT_MIN);
         
-        while(p1!=NULL){
-   
-          ListNode * p2 = head;  
+        dummy->next = head;
+        ListNode* curr = head->next;
+        ListNode* prevCurr = head;
+        ListNode* currNext = NULL;
         
+        
+        while(curr!=NULL){
             
-    
-            while(p2!=p1){
+            
+            
+            currNext = curr->next; // store the next node
+            ListNode* j = dummy->next; // head
+            ListNode* prevj=dummy; // dummy node ko point kr rha hai
+            bool f= false;
+            
+            
+            while(j!=curr){ // jb tk j curr ke barabar n pahuch jaye
                 
                 
-                if(p2->val<=p1->val){
+                if(j->val<=curr->val){ // value kam hai to j ko badhate rho
                     
-                    p2 = p2->next;
+                    prevj = j; // prev store kiya 
+                    j=j->next; // j ko badhaya
                     continue;
                 }
-                                
-                    swap(p1->val,p2->val);
-                    
                 
-                // break;
+                // yha pr j->val jyada hai curr->val se
                 
+                
+        // cout<<curr->val << j->val <<prevj->val <<prevCurr->val<<endl;
+                
+                f=true;
+                curr->next=j; // step 1 done
+                prevj->next=curr; // step 2 done
+                prevCurr->next = currNext; //step 3 done
+                
+                break;
             }
             
-            // ListNode* x = head;
-            // while(x!=NULL){
-            //     cout<<x->val<<" ";
-            //     x=x->next;
-            // }
-            // cout<<endl;
-           
-            p1 = p1->next;
+            if(f==false)
+                prevCurr = curr;
+            curr = currNext;
+            
+        }
         
-        } 
-        
-        return head;
-        
+        return dummy->next;
         
     }
 };
