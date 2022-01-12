@@ -12,17 +12,17 @@ public:
         temp.push_back(nums[idx]);
         
         if(idx==0){
-            // temp.push_back(nums[idx]);
+            
             solver(nums,idx+1,temp,true);
         }
         else if(idx>0 && nums[idx-1]!=nums[idx]){
             
-             // temp.push_back(nums[idx]);
+             
              solver(nums,idx+1,temp,true);
             
         }else if(idx>0 && nums[idx-1]==nums[idx] && included){
             
-             // temp.push_back(nums[idx]);
+             
              solver(nums,idx+1,temp,true);
         }
         
