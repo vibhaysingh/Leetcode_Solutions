@@ -35,10 +35,10 @@ public:
                          if(solver(board)){
                             return true;
                         }
-                        else{
+                      
                             
                             board[i][j]='.';
-                       }
+                       
                             
                     }     
                 }
