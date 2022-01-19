@@ -4,26 +4,71 @@ using namespace std;
 
 
  // } Driver Code Ends
+
+
 class Solution{
     public:
-    int kthElement(int arr1[], int arr2[], int n, int m, int k)
+    int kthElement(int A[], int B[], int n, int m, int k)
     {
-         if(n>m)return kthElement(arr2,arr1,m,n,k);
-        int low=max(0,k-m),high=min(k,n);
-        while(low<=high){
-            int cut1=(low+high)>>1;
-            int cut2=k-cut1;
-            int l1=cut1==0?INT_MIN:arr1[cut1-1];
-            int l2=cut2==0?INT_MIN:arr2[cut2-1];
-            int r1=cut1==n?INT_MAX:arr1[cut1];
-            int r2=cut2==m?INT_MAX:arr2[cut2];
-            if(l1<=r2&&l2<=r1)return max(l1,l2);
-            else if(l1>r2) high=cut1-1;
-            else low= cut1 +1;
+        
+        // assume n is smaller
+        
+        if(n > m){
+            return kthElement( B,  A,  m,  n,  k);
         }
-        return 1;
+        
+        // ab n chhota m se 100%
+        
+        int low = -1;
+        int high = n-1;
+        
+        while(low<=high){
+            
+             
+                          
+            int i = (low+high)/2; 
+            
+            int j = k - i-2;
+            
+            if(j<-1){
+                high = i-1;
+                continue;
+            }
+            
+             if (j >= m) {
+             low = i + 1;
+           continue;
+           }
+            
+            
+            int Aleft = i>=0 ? A[i] : INT_MIN;
+            int Aright = (i+1) < n ? A[i+1] : INT_MAX;
+            int Bleft = j>=0 ? B[j] : INT_MIN;
+            int Bright = (j+1)<m ? B[j+1] : INT_MAX;
+            
+            // check validity
+            
+            if(Aleft<=Bright && Bleft<=Aright){
+                
+                return max(Aleft,Bleft);
+            }
+            else if(Aleft>Bright){
+                high = i-1;
+            }
+            else{
+                low = i+1;
+            }
+            
+            
+            
+            
+        }
+        
+        return -1;
+        
     }
 };
+
 
 // { Driver Code Starts.
  
