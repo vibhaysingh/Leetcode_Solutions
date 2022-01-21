@@ -11,7 +11,7 @@ public:
         int n  = nums2.size();
         vector<int>ngr(n,-1);
         
-        map<int,int>mp;
+        unordered_map<int,int>mp;
         
         for(int i=n-1;i>=0;i--){
             
