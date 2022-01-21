@@ -11,11 +11,11 @@ public:
         int n  = nums2.size();
         vector<int>ngr(n,-1);
         
-        unordered_map<int,int>mp;
+        // unordered_map<int,int>mp;
         
         for(int i=n-1;i>=0;i--){
             
-            mp[nums2[i]]=i;
+            // mp[nums2[i]]=i;
             if(st.empty()){
                 st.push(nums2[i]);
                 continue;
@@ -30,6 +30,8 @@ public:
                 ngr[i]=-1;
             }
             
+            a[nums2[i]]=ngr[i];
+            
             st.push(nums2[i]);
             
             
@@ -39,8 +41,8 @@ public:
         
         for(int i=0;i<nums1.size();i++){
             
-            int idx = mp[nums1[i]];
-            ans.push_back(ngr[idx]);
+            // int idx = mp[nums1[i]];
+            ans.push_back(a[nums1[i]]);
         }
         
         
