@@ -9,7 +9,7 @@ public:
         stack<int>st;
         
         int n  = nums2.size();
-        vector<int>ngr(n,-1);
+        // vector<int>ngr(n,-1);
         
         // unordered_map<int,int>mp;
         
@@ -25,12 +25,12 @@ public:
                 st.pop();
             
             if(!st.empty()){
-                ngr[i]=st.top();
+                a[nums2[i]]=st.top();
             }else{
-                ngr[i]=-1;
+                a[nums2[i]]=-1;
             }
             
-            a[nums2[i]]=ngr[i];
+            // a[nums2[i]]=ngr[i];
             
             st.push(nums2[i]);
             
