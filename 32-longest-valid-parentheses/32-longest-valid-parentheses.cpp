@@ -4,10 +4,10 @@ public:
         
         int n = s.size();
         
-        stack<char>char_st;
+        // stack<char>char_st;
         stack<int>idx_st;
         
-        idx_st.push(-1); // assume -1 is problem cuasing index
+        idx_st.push(-1); 
         
         int ans =0;
         
@@ -15,29 +15,24 @@ public:
             
             if(s[i]=='('){
                 
-                char_st.push(s[i]);
+               
                 
-                idx_st.push(i); // assume i is problem causing index if its pair is not 
-                // found in further string
+                idx_st.push(i); 
                 
             }else{
+                                    idx_st.pop();
+
+                
+                  if(idx_st.empty()){
+                      idx_st.push(i);
+                      continue;
+                  }
+                    
+                    
+                    
+                    ans = max(ans,i-idx_st.top()); 
                 
                 
-                if(!char_st.empty() && char_st.top()=='('){
-                    
-                    // cout<<idx_st.size()<<endl;
-                    
-                    char_st.pop();
-                    idx_st.pop();
-                    
-                    ans = max(ans,i-idx_st.top());
-                    
-                    
-                }
-                else{
-                    
-                    idx_st.push(i);
-                }
                 
             }
         }
