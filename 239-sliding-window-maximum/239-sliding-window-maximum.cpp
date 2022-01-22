@@ -3,36 +3,38 @@ public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         
         int n = nums.size();        
-        vector<int>ngr(n);
-        stack<int>st;
-        ngr[n-1]=n;
         
-        st.push(n-1);
+        // deque will store the max element of the window in front
+        // flush the indices which are out of window
         
-        for(int i=n-2;i>=0;i--){
-            
-            while(!st.empty() && nums[st.top()]<nums[i]){
-                st.pop();
-            }
-            
-            if(st.empty()){
-                ngr[i]=n;
-            }else{
-                ngr[i]=st.top();
-            }
-            st.push(i);
-        }
-        
+        deque<int>dq;
         vector<int>ans;
         
-        for(int i=0,j=0;i<=n-k;i++){
+        for(int i=0;i<n;i++){
             
-            if(j<i) j=i;
             
-            while(ngr[j]<i+k) /// we will move untill the ngr of ith element is out of window
-                j = ngr[j];
+              /// check for invalid index in deque
             
-            ans.push_back(nums[j]);
+               while(!dq.empty() && dq.front()<i-k+1)
+                    dq.pop_front();
+                
+             // try to put max element of window to the front
+                
+                while(!dq.empty() && nums[dq.back()]<nums[i]){
+                    dq.pop_back();
+                }
+            
+            dq.push_back(i);
+            
+//             for(auto k :dq){
+//                 cout<<nums[k]<<" ";
+//             }
+//             cout<<endl;
+            
+            if(i>=k-1)// make answer if atleast 1 window is processed
+                ans.push_back(nums[dq.front()]);
+                
+                
             
         }
         
