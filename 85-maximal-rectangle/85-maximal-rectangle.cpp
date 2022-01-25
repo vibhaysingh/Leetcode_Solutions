@@ -1,17 +1,14 @@
 class Solution {
 public:
     
-    int maxAreahistogram(vector<int>v){
+    int maxAreahistogram(vector<int>&v){
         
-        int n = v.size();
-        
+        int n = v.size();        
         stack<int>st;
-        int ans=0;
-        
+        int ans=0;        
         for(int i=0;i<=n;i++){
             
-            
-            while(!st.empty() &&( i==n || v[st.top()]>v[i])){
+         while(!st.empty() &&( i==n || v[st.top()]>v[i])){
                 
                 int height = v[st.top()];
                 
@@ -28,16 +25,13 @@ public:
                 ans = max(ans,height*width);
             }
             
-            st.push(i);
-            
+            st.push(i);            
         }
         
         return ans;
     }
     
-    int maximalRectangle(vector<vector<char>>& mat) {
-        
-        
+    int maximalRectangle(vector<vector<char>>& mat) {        
         int n = mat.size();
         int m = mat[0].size();
         
@@ -53,21 +47,12 @@ public:
                 else{
                    v[j]+=1; 
                     
-                }
-                
+                }                
             }
-            int x  =maxAreahistogram(v);
-//             cout<<x<<endl;
-//             for(auto k:v){
-//                 cout<<k<<" ";
-                
-//             }
-//             cout<<endl;
-            ans = max(ans,x);
             
-        }
-        
-        return ans;
-        
+            int x  =maxAreahistogram(v);
+            ans = max(ans,x);            
+        }        
+        return ans;        
     }
 };
