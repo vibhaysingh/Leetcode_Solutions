@@ -17,7 +17,7 @@ public:
                 continue;
             }
                         
-            while(! st.empty() && nums[st.top()] >=nums[i]) st.pop();
+            while(! st.empty() && nums[st.top()] >nums[i]) st.pop();
             
             if(!st.empty())
             left[i] = st.top(); 
@@ -33,7 +33,7 @@ public:
                 continue;
             }
             
-             while(!st.empty() && nums[st.top()] >nums[i]) st.pop();
+             while(!st.empty() && nums[st.top()] >=nums[i]) st.pop();
             
              if(!st.empty()) 
             right[i] = st.top();
