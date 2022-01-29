@@ -2,9 +2,20 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
+        int a[26]={0};
         
-        return (s==t);
+        if(s.size()!=t.size()) return false;
+        
+        for(int i=0;i<s.size();i++){
+            a[s[i]-'a']++;
+        }
+        
+        for(int i=0;i<s.size();i++){
+            a[t[i]-'a']--;
+            
+            if(a[t[i]-'a']<0) return false;
+        }
+        
+        return true;
     }
 };
