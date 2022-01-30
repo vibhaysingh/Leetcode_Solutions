@@ -8,8 +8,7 @@ public:
         int sign = 1;
         bool f= false;
         int n = s.size();
-        // cout<<INT_MAX<<endl;
-        // cout<<INT_MIN<<endl;
+       
         for(int i=0;i<s.size();i++){
             
             if(s[i]==' ') continue;
