@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int check(map<char,int>&mp){
+    int check(unordered_map<char,int>&mp){
         
         char key;
         int mx = 0;
@@ -35,7 +35,7 @@ public:
         int start =0 , end = 0 , ans=0;
         
         
-        map<char,int>mp;
+        unordered_map<char,int>mp;
         
         while(end<n){
             
