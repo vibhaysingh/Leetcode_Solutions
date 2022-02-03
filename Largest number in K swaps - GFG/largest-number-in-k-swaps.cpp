@@ -14,7 +14,7 @@ class Solution
     
     //Function to find the largest number after k swaps.
     
-    void solve(string str, int n, int k,int index)
+    void solve(string &str, int n, int k,int index)
     {
         // if(ans<str)
         // ans = str;
