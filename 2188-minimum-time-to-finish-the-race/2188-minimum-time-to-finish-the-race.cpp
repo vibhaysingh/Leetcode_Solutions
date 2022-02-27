@@ -23,7 +23,7 @@ public:
                 
                 ttl+=t;
                 
-                if(ttl>1e5) break;
+                if(ttl>2e5) break;
                 
                 dp1[j] = min(dp1[j],ttl);
             }
