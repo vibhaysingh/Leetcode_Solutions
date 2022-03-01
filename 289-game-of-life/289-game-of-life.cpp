@@ -50,9 +50,9 @@ public:
                
                int cnt= ttln(i,j,b);
                
-               if(i==2&&j==2){
-                   cout<<"cnt"<<cnt<<endl;
-               }
+               // if(i==2&&j==2){
+               //     cout<<"cnt"<<cnt<<endl;
+               // }
                
                if(b[i][j]==1){
                    
