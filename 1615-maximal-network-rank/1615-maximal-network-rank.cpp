@@ -3,14 +3,14 @@ public:
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
         
         vector<int>cnt(n,0);
-         map<pair<int,int>,bool>mp;
+         set<pair<int,int>>mp;
         for(auto k:roads){
             
             cnt[k[0]]+=1;
             cnt[k[1]]+=1;
             int x=k[0],y=k[1];
                             if(x>y)swap(x,y);
-            mp[{x,y}]=true;
+            mp.insert({x,y});
         }
         
         int ans=0;
