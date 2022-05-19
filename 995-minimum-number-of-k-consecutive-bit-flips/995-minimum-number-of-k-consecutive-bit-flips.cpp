@@ -29,7 +29,7 @@ public:
             
             /// check flip condition
             
-            if((nums[i]==0 && flip[i]%2==0)||(nums[i]==1 && flip[i]%2==1)){
+            if((nums[i]+  flip[i])%2==0){
                 
                 ans++;
                 flip[i]++;
