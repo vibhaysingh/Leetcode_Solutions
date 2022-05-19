@@ -6,7 +6,9 @@ public:
         
         int n = nums.size();
         
-        int * flip = new int[n+1];
+        // int * flip = new int[n+1];
+        
+        int flip[n+1];
         
         // int flip[n+1]={0};
         
