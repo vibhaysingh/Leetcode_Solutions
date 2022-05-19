@@ -6,7 +6,18 @@ public:
         
         int n = nums.size();
         
-        vector<int>flip(n+1,0);
+        int * flip = new int[n+1];
+        
+        // int flip[n+1]={0};
+        
+        
+        for(int i=0;i<n+1;i++){
+            flip[i]=0;
+            // cout<<flip[i]<<" ";
+        }
+        // cout<<endl;
+        
+       
         
         int ans=0;
         
