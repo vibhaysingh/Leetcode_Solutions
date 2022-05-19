@@ -13,12 +13,13 @@ public:
         // int flip[n+1]={0};
         
         
-        for(int i=0;i<n+1;i++){
-            flip[i]=0;
-            // cout<<flip[i]<<" ";
-        }
+        // for(int i=0;i<n+1;i++){
+        //     flip[i]=0;
+        //     // cout<<flip[i]<<" ";
+        // }
         // cout<<endl;
         
+        memset(flip,0,sizeof flip);
        
         
         int ans=0;
