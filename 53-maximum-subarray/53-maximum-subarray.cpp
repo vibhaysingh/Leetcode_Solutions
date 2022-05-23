@@ -1,33 +1,38 @@
 class Solution {
 public:
+    
+   long  solver(int l,int r,vector<int>&nums){
+        
+        if(l>r) return INT_MIN;
+        
+       long  int mid = (l+r)/2;
+        
+       long  int leftsum=0,rightsum=0;
+        
+        for(long int i=mid-1,currsum=0;i>=l;i--){
+            
+            currsum+=nums[i];
+            leftsum=max(leftsum,currsum);
+        }
+        
+        for(long int i=mid+1,currsum=0;i<=r;i++){
+            
+            currsum+=nums[i];
+            rightsum = max(rightsum,currsum);
+        }
+        
+        return max({leftsum+nums[mid]+rightsum, solver(l,mid-1,nums), solver(mid+1,r,nums)});
+    }
+    
     int maxSubArray(vector<int>& nums) {
         
         
-       int n = nums.size();
+        int n = nums.size();
         
-       int curr=nums[0];
         
-        int ans=nums[0];
+        return solver(0,nums.size()-1,nums);
         
-        for(int i=1;i<n;i++){
-            
-            if(curr+nums[i]>nums[i]){
-                
-                curr+=nums[i];
-                
-                ans=max(ans,curr);
-            }
-            else{
-                
-                 ans=max(ans,curr);
-                 curr=nums[i];
-                 ans=max(ans,curr);
-            }
-            
-            // cout<<curr<<endl;
-        }
         
-        return ans;
         
     }
 };
