@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        
+        
+       int n = nums.size();
+        
+       int curr=nums[0];
+        
+        int ans=nums[0];
+        
+        for(int i=1;i<n;i++){
+            
+            if(curr+nums[i]>nums[i]){
+                
+                curr+=nums[i];
+                
+                ans=max(ans,curr);
+            }
+            else{
+                
+                 ans=max(ans,curr);
+                 curr=nums[i];
+                 ans=max(ans,curr);
+            }
+            
+            // cout<<curr<<endl;
+        }
+        
+        return ans;
+        
+    }
+};
