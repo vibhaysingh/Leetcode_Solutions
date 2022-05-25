@@ -4,7 +4,7 @@ public:
     int solve(vector<int>& nums, int k){
         
         
-         map<int,int>mp; 
+         unordered_map<int,int>mp; 
         
         if(k==0) return 0;
        
