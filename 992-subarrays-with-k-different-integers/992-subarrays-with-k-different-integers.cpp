@@ -4,7 +4,11 @@ public:
     int solve(vector<int>& nums, int k){
         
         
-         unordered_map<int,int>mp; 
+         int mp[20005];
+        
+        for(int i=0;i<20005;i++){
+            mp[i]=0;
+        }
         
         if(k==0) return 0;
        
