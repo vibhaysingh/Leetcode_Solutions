@@ -27,8 +27,8 @@ public:
           
             
             int carry  = add(l1->next,l2,len1-1,len2);
-            // cout<<l1->val<<endl;
-            // cout<<carry<<endl;
+           
+            
             if(carry){
                 
                 l1->val+=carry;
