@@ -10,13 +10,11 @@ public:
         
      
         
-        int f[1000]={0};
+        int f[256]={0};
         
         
         for(int i=0;i<t.size();i++){           
-            // p[t[i]-'A']=1;
-            f[t[i]-'A']++;
-            // mx[t[i]-'A']++;
+            f[t[i]-'A']++;          
         }
         
        long long int l=INT_MIN,r=INT_MAX;
