@@ -15,16 +15,17 @@ public:
         
         if(root==NULL) return NULL;
         
-        if(root==p||root==q) return root;
         
-        TreeNode* left = lca(root->left,p,q);
-        TreeNode* right = lca(root->right,p,q);
+        if(p->val<root->val && q->val<root->val)
         
-        if(left&&right) return root;
+        return lca(root->left,p,q);
         
-        if(!left) return right;
+        else  if(p->val>root->val && q->val>root->val)
         
-        return left;
+        return lca(root->right,p,q);
+        
+        
+        return root;
     }
     
     
