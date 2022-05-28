@@ -33,7 +33,7 @@ public:
        
         ans=0;
         int val = -100000;
-        dfs(root,val);
+        dfs(root,root->val);
         return ans;
     }
 };
