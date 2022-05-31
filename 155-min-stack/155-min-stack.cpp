@@ -4,40 +4,54 @@ public:
         
     }
     
-    stack<int>st1,st2;
+    long long int mn;
+    stack<long long >st;
     
     void push(int val) {
         
-        st1.push(val);
-        
-        if(st2.empty()||val<=st2.top()){
-            st2.push(val);
+      if(st.empty()){
+          mn = val;
+          st.push(val);
+      }
+        else if(val>=mn){
+            st.push(val);
+        }
+        else{
+            st.push(2LL*val-mn);
+            mn = val;
         }
         
     }
     
     void pop() {
         
-        if(st1.top()==st2.top())st2.pop();
+        if(st.top()<mn){
+         
+             mn = 2*mn - st.top();
+        }
+       
         
-        st1.pop();
-        
+        st.pop();
         
         
     }
     
     int top() {
         
-        return st1.top();
+        if(st.top()<mn) return mn;
+        
+        return st.top();
         
     }
     
     int getMin() {
         
-        return st2.top();
+        return mn;
         
     }
 };
+
+
 
 
         
