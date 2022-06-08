@@ -2,7 +2,7 @@ class Solution {
 public:
     int ladderLength(string bw, string ew, vector<string>& wl) {
         
-        set<string>st(wl.begin(),wl.end());
+        unordered_set<string>st(wl.begin(),wl.end());
         
         
         queue<string>q;
