@@ -22,7 +22,7 @@ public:
 class Solution {
 public:
     
-    map<Node*,Node*>mp;
+    unordered_map<Node*,Node*>mp;
     Node* clone(Node* par){
         
         if(par==NULL) return NULL;
