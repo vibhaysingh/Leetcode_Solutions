@@ -18,7 +18,7 @@ public:
         
         val/=2;
         
-        cout<<val<<endl;
+        // cout<<val<<endl;
         
         // if(sum-target==0) return (1<<cnt);
         int n = nums.size();
