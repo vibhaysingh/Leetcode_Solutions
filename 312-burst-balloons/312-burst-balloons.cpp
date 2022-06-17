@@ -21,15 +21,34 @@ public:
         return dp[i][j]=temp;
     }
     
-    int maxCoins(vector<int>& nums) {
+    int maxCoins(vector<int>& v) {
         
-        int n = nums.size();
-        nums.push_back(1);
-        nums.insert(nums.begin(),1);
+        int n = v.size();
+        v.push_back(1);
+        v.insert(v.begin(),1);
         
-        memset(dp,-1,sizeof dp);
+        memset(dp,0,sizeof dp);
         
-        return solver(1,n,nums);
+        for(int i=n;i>=1;i--){
+             
+            for(int j=1;j<=n;j++){
+                
+                if(i>j) continue;
+                  int temp = INT_MIN;
+                 for(int k=i;k<=j;k++){
+            
+            int x = (v[i-1]*v[k]*v[j+1]) + dp[i][k-1] + dp[k+1][j];
+            
+            temp = max(temp,x);
+        }
+        
+          dp[i][j]=temp;
+                
+            }
+            
+        }
+        
+        return dp[1][n];
         
     }
 };
