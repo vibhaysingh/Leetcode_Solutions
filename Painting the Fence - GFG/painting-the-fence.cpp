@@ -8,19 +8,7 @@ using namespace std;
 class Solution{
     public:
     
-    int m = 1e9+7;
     
-    long long add(long long a,long long b){
-        
-        long long c = (a%m+b%m)%m;
-        return c;
-    }
-    
-     long long mul(long long a,long long b){
-        
-        long long c = (a%m*b%m)%m;
-        return c;
-    }
     
     
     
@@ -55,10 +43,38 @@ Solution(){
         
     }
     
+    int m = 1e9+7;
+    
+    long long add(long long a,long long b){
+        
+        long long c = (a%m+b%m)%m;
+        return c;
+    }
+    
+     long long mul(long long a,long long b){
+        
+        long long c = (a%m*b%m)%m;
+        return c;
+    }
+    
     long long countWays(int n, int k){
         // code here
         
-        return solve(n,k);
+        // return solve(n,k);
+        
+        vector<long>dp(n+1,0);
+        
+        dp[1]=k;
+        dp[2]=add(k,mul(k,k-1));
+        
+        for(int i=3;i<=n;i++){
+            
+            dp[i] = add(mul(dp[i-1],k-1),mul(dp[i-2],k-1));
+        }
+        
+        return dp[n];
+        
+        
     }
 };
 
