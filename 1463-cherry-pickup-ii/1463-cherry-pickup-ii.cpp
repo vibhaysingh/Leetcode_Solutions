@@ -54,7 +54,7 @@ public:
         int m = grid[0].size();
         int n = grid.size();
         memset(dp,0,sizeof dp);
-        for(int j1=0;j1<m;j1++){
+        for(int j1=m-1;j1>=0;j1--){
             
             for(int j2=0;j2<m;j2++){
                 
