@@ -1,46 +1,48 @@
-int dp[1005][2][105];
+int dp[1005][205];
 class Solution {
 public:
-    int maxProfit(int ttl, vector<int>& prices) {
-        
-        memset(dp,0,sizeof dp);
+    
+    int solver(int idx,int tno,int k,vector<int>& prices){
         
         int n = prices.size();
+        if(tno==k||idx==n ) return 0;
         
-        vector<vector<int>>ahead(2,vector<int>(ttl+1,0));
-        vector<vector<int>>curr(2,vector<int>(ttl+1,0));
         
-        for(int idx=n-1;idx>=0;idx--){
+        if(dp[idx][tno]!=-1) return dp[idx][tno];
+        
+        
+        if((tno%2)==0){ // buy
             
-            for(int k=1;k<=ttl;k++)
-            {
-                for(int own = 0;own<=1;own++){
-                    
-                      
-        if(own){
             
-            // sell and not sell
+            int op1  = -prices[idx] + solver(idx+1,tno+1,k,prices);
+            int op2  = 0 + solver(idx+1,tno,k,prices);
             
-            int op1 = prices[idx] +  ahead[0][k-1];
-            int op2 = 0+ ahead[1][k];
-            
-             curr[own][k]=max(op1,op2);
+            return  dp[idx][tno]= max(op1,op2);
         }
         else{
             
-            // buy & not buy
+            int op1  = prices[idx] + solver(idx+1,tno+1,k,prices);
+            int op2  = 0 + solver(idx+1,tno,k,prices);
             
-              int op1 = -prices[idx] + ahead[1][k];
-              int op2 = 0 + ahead[0][k];
-             curr[own][k]=max(op1,op2);
-        }
-                }
-            }
+            return  dp[idx][tno]=max(op1,op2);
             
-            ahead=curr;
         }
         
         
-        return curr[0][ttl];
+    }
+    
+    
+    
+    
+    
+    int maxProfit(int ttl, vector<int>& prices) {
+        
+        memset(dp,-1,sizeof dp);
+        
+        int n = prices.size();
+        
+        ttl*=2;
+        
+        return solver(0,0,ttl,prices);
     }
 };
