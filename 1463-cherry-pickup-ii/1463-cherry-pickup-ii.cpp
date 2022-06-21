@@ -90,7 +90,7 @@ public:
                  val  = val  + dp[i+1][j1+x][j2+y] ;
                   
                 }
-                else val+=(-1e8);
+                
                 
                   mx = max(val,mx);
                 
