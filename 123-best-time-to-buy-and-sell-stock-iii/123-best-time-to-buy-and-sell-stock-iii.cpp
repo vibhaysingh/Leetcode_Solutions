@@ -42,6 +42,9 @@ public:
         
         int n = prices.size();
         
+        vector<vector<int>>ahead(2,vector<int>(3,0));
+        vector<vector<int>>curr(2,vector<int>(3,0));
+        
         for(int idx=n-1;idx>=0;idx--){
             
             for(int k=1;k<=2;k++)
@@ -53,24 +56,26 @@ public:
             
             // sell and not sell
             
-            int op1 = prices[idx] +  dp[idx+1][0][k-1];
-            int op2 = 0+ dp[idx+1][1][k];
+            int op1 = prices[idx] +  ahead[0][k-1];
+            int op2 = 0+ ahead[1][k];
             
-             dp[idx][own][k]=max(op1,op2);
+             curr[own][k]=max(op1,op2);
         }
         else{
             
             // buy & not buy
             
-              int op1 = -prices[idx] + dp[idx+1][1][k];
-              int op2 = 0 + dp[idx+1][0][k];
-             dp[idx][own][k]=max(op1,op2);
+              int op1 = -prices[idx] + ahead[1][k];
+              int op2 = 0 + ahead[0][k];
+             curr[own][k]=max(op1,op2);
         }
                 }
             }
+            
+            ahead=curr;
         }
         
         
-        return dp[0][0][2];
+        return curr[0][2];
     }
 };
