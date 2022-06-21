@@ -17,6 +17,9 @@ public:
       
       
            if(p[j]=='*'){
+                 if(j-1>=0 && p[j-1]=='*'){
+              check=help(s,p,i,j+1);
+            }
            
            check = ( (i<n   && help(s,p,i+1,j)) || help(s,p,i,j+1));
             
