@@ -1,45 +1,50 @@
-int dp[2005][2005];
+
 class Solution {
 public:
     
-  
     
-    bool help( string & s, string &p, int i, int j){
-        int n=s.size(),m=p.size();
+    int solver(int i,int j,string &s,string &p,int &n,int &m,vector<vector<int>>&dp){
         
-         if(j>=m)
-           return  i>=n;
-      
-        bool check = false;
-      
-           if(dp[i][j]!=-1)
-            return dp[i][j];
-      
-      
-           if(p[j]=='*'){
-                 if(j-1>=0 && p[j-1]=='*'){
-              check=help(s,p,i,j+1);
+        
+        if(i==n&&j==m) return true;
+        
+        if(i==n){
+            for(int k=j;k<m;k++){
+                if(p[k]!='*') return false;
             }
-           
-           check = ( (i<n   && help(s,p,i+1,j)) || help(s,p,i,j+1));
             
-         }
-      else  {
-          
-           if(i>=n)
-            check=false; 
-          
-          else if(p[j]==s[i] || p[j]=='?')
-           check=help(s,p,i+1,j+1);          
-      }
-      
-      return dp[i][j]=check;
+            return true;
+        }
+        
+        if(j==m){
+            return false;
+        }
+        
+        if(dp[i][j]!=-1) return dp[i][j];
+        
+        
+        if(s[i]==p[j]||p[j]=='?'){
+            
+            return dp[i][j]=solver(i+1,j+1,s,p,n,m,dp);
+        }
+        else if(p[j]=='*'){
+            
+            
+            
+            return dp[i][j]=(solver(i+1,j,s,p,n,m,dp)||solver(i,j+1,s,p,n,m,dp));
+        }
+        
+        return dp[i][j]=false;
     }
+    
     bool isMatch(string s, string p) {
-         
-        memset(dp,-1, sizeof dp);
-      
-        return help(s,p,0,0);
-   
+        
+        
+        int n = s.size();
+        int m = p.size();
+        
+        vector<vector<int>>dp(n+1,vector<int>(m,-1));
+        
+        return solver(0,0,s,p,n,m,dp);
     }
 };
