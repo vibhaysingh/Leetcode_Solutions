@@ -87,14 +87,13 @@ public:
         
       
         
-        int br  =dp[r1][c1+1][r2];
-        int bd = dp[r1+1][c1][r2+1];
-        int orod = dp[r1][c1+1][r2+1];
-        int odor = dp[r1+1][c1][r2];
-        
-        ans  = ans+  max({br,bd,orod,odor});
-        
-         dp[r1][c1][r2]=ans;
+               int br  =dp[r1][c1+1][r2];
+               int bd = dp[r1+1][c1][r2+1];
+              int orod = dp[r1][c1+1][r2+1];
+               int odor = dp[r1+1][c1][r2];        
+                 ans  += max({br,bd,orod,odor});        
+             dp[r1][c1][r2]=ans;
+                    
                 }
             }
         }
