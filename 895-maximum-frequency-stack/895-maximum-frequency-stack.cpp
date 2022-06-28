@@ -4,8 +4,8 @@ public:
         
     }
     
-    map<int,int>f;
-    map<int,stack<int>>fs;
+    unordered_map<int,int>f;
+    unordered_map<int,stack<int>>fs;
     
     int mxf=0;
     
