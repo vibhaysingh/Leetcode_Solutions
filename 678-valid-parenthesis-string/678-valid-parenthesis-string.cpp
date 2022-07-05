@@ -1,41 +1,37 @@
 class Solution {
 public:
-    
-    int dp[105][105][105];
-    
-    bool solver(int idx,int open,int close,string &s){
-        
-        if(idx==s.size()){
-            return (open==close);
-        }
-        
-        if(close >open) return false;
-        
-        if(dp[idx][open][close]!=-1) return dp[idx][open][close];
-        
-        bool f= false;
-        
-        if(s[idx]=='('){
-            
-            f= f|(solver(idx+1,open+1,close,s));
-            
-        }
-        else if(s[idx]==')'){
-            f= f|(solver(idx+1,open,close+1,s));
-        }
-        else if(s[idx]=='*'){
-             f= f|(solver(idx+1,open+1,close,s));
-              f= f|(solver(idx+1,open,close+1,s));
-              f= f|(solver(idx+1,open,close,s));
-        }
-        
-        return dp[idx][open][close]=f;
-    }
-    
     bool checkValidString(string s) {
         
-        memset(dp,-1,sizeof dp);
         
-        return solver(0,0,0,s);
+        int n = s.size();
+        
+        int leftmin=0;
+        int leftmax=0;
+        
+        for(auto k:s){
+            
+            if(k=='('){
+                leftmin++;
+                leftmax++;
+            }
+            else if(k==')'){
+                
+                leftmin--;
+                leftmax--;
+            }
+            else{
+                
+                leftmax++;
+                leftmin--;
+            }
+            
+            if(leftmin<0)leftmin=0;
+            if(leftmax<0) return false;
+        }
+        
+        if(0>=leftmin && 0<=leftmax) return true;
+        
+        return false;
+        
     }
 };
