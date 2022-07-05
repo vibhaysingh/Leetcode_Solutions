@@ -29,7 +29,7 @@ public:
             if(leftmax<0) return false;
         }
         
-        if(0>=leftmin && 0<=leftmax) return true;
+        if(0>=leftmin) return true;
         
         return false;
         
