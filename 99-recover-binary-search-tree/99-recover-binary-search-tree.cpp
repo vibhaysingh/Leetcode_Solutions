@@ -12,70 +12,44 @@
 class Solution {
 public:
     
-    vector<int>v;
-    void in(TreeNode* root){
+    TreeNode* first = NULL;
+    TreeNode* second = NULL;
+    TreeNode* prev = NULL;
+    
+    void inorder(TreeNode* root){
         
         if(!root) return;
         
-       
-        in(root->left);
-         v.push_back(root->val);
-        in(root->right);
+        inorder(root->left);
         
-        
-    }
-    
-    TreeNode* c;TreeNode* d;
-    
-    void solver(TreeNode* root,int a,int b)
-    {
-        
-        if(root==NULL) return;
-        
-        if(root->val==a){
-            c=root;
-        }
-        else if(root->val==b){
-            d=root;
+        if(first==NULL && prev->val> root->val){
+            first = prev;
         }
         
-        solver(root->left,a,b);
-        solver(root->right,a,b);
+        if(first!=NULL && prev->val>root->val ){
+            second = root;
+        }
+        
+        prev = root;
+        
+        inorder(root->right);
     }
+    
+    // 1 2 3 4 5
+    // 1 5 3 4 2
     
     
     void recoverTree(TreeNode* root) {
         
-        v.clear();
-        in(root);
+         first = NULL;
+     second = NULL;
+ prev = new TreeNode(INT_MIN);
         
-        vector<int>a=v;
-        sort(a.begin(),a.end());
+        inorder(root);
         
-        int x,y;
+        // cout<<first->val<<" "<<second->val<<endl;
         
-        
-        
-        for(int i=0;i<a.size();i++){
-            
-            cout<<a[i]<<" "<<v[i]<<endl;
-            
-            if(a[i]!=v[i]){
-                x=a[i];
-                y=v[i];
-                break;
-            }
-        }
-        
-        cout<<x<<y<<endl;
-        solver(root,x,y);
-        
-        cout<<c->val<<" "<<d->val<<endl;
-        
-        swap(c->val,d->val);
-        
+        swap(first->val,second->val);
         
     }
 };
-
- 
