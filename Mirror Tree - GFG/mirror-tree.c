@@ -220,11 +220,13 @@ void mirror(struct Node* node) {
    struct Node* left = node->left;
    struct Node* right = node->right;
     
+    
+     node->left=right;
+    node->right=left;
     mirror(left);
     mirror(right);
     
-    node->left=right;
-    node->right=left;
+   
 }
 
 // { Driver Code Starts.
